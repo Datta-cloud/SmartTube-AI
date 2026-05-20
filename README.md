@@ -47,8 +47,3 @@ No need to watch long videos — just paste the link and study smart! 🚀
 | 🤖 Groq API (LLaMA 3.3) | AI content generation |
 | 📡 YouTube oEmbed API | Fetch video title & thumbnail |
 | 🔐 python-dotenv | API key management |
-
-
-If you found this useful, please ⭐ star the repo — it helps a lot!
-
-[![GitHub stars](https://img.shields.io/github/stars/Datta-cloud/SmartTube-AI?style=social)](https://github.com/Datta-cloud/SmartTube-AI)
