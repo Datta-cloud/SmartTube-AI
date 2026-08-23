@@ -12,7 +12,7 @@ GROK_URL = "https://api.groq.com/openai/v1/chat/completions"
 def ask_ai(prompt):
     try:
         headers = {"Authorization": f"Bearer {API_KEY}", "Content-Type": "application/json"}
-        body = {"model": "llama-3.3-70b-versatile", "messages": [{"role": "user", "content": prompt}]}
+        body = {"model": "openai/gpt-oss-120b", "messages": [{"role": "user", "content": prompt}]}
         response = requests.post(GROK_URL, headers=headers, json=body, timeout=60)
         data = response.json()
         if "choices" not in data:
@@ -27,7 +27,7 @@ def ask_ai_chat(messages):
     """Multi-turn chat with message history."""
     try:
         headers = {"Authorization": f"Bearer {API_KEY}", "Content-Type": "application/json"}
-        body = {"model": "llama-3.3-70b-versatile", "messages": messages}
+        body = {"model": "openai/gpt-oss-120b", "messages": messages}
         response = requests.post(GROK_URL, headers=headers, json=body, timeout=60)
         data = response.json()
         if "choices" not in data:
