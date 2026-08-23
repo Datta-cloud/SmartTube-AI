@@ -12,13 +12,21 @@ GROK_URL = "https://api.groq.com/openai/v1/chat/completions"
 def ask_ai(prompt):
     try:
         headers = {"Authorization": f"Bearer {API_KEY}", "Content-Type": "application/json"}
-        body = {"model": "openai/gpt-oss-120b", "messages": [{"role": "user", "content": prompt}]}
+        body = {
+            "model": "openai/gpt-oss-120b",
+            "messages": [{"role": "user", "content": prompt}],
+            "reasoning_effort": "low",
+            "max_completion_tokens": 4096
+        }
         response = requests.post(GROK_URL, headers=headers, json=body, timeout=60)
         data = response.json()
         if "choices" not in data:
             print("API error:", data)
             return ""
-        return data["choices"][0]["message"]["content"]
+        content = data["choices"][0]["message"]["content"]
+        if not content:
+            print("Empty content returned. Raw response:", data)
+        return content
     except Exception as e:
         print(f"AI Error: {e}")
         return ""
@@ -27,7 +35,12 @@ def ask_ai_chat(messages):
     """Multi-turn chat with message history."""
     try:
         headers = {"Authorization": f"Bearer {API_KEY}", "Content-Type": "application/json"}
-        body = {"model": "openai/gpt-oss-120b", "messages": messages}
+        body = {
+            "model": "openai/gpt-oss-120b",
+            "messages": messages,
+            "reasoning_effort": "low",
+            "max_completion_tokens": 2048
+        }
         response = requests.post(GROK_URL, headers=headers, json=body, timeout=60)
         data = response.json()
         if "choices" not in data:
